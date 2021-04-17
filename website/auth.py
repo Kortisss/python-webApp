@@ -18,6 +18,7 @@ def login():
         if user:
             if check_password_hash(user.password, password):
                 flash('Logged in successfully!', category='success')
+                # remember logged user session data
                 login_user(user, remember=True)
                 return redirect(url_for('views.home'))
             else:
@@ -29,7 +30,7 @@ def login():
 
 
 @auth.route('/logout')
-@login_required
+@login_required #block access to logout; you need to log in to logout
 def logout():
     logout_user()
     return redirect(url_for('auth.login'))
