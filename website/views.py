@@ -1,8 +1,12 @@
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
+from imgurpython import ImgurClient
+import configparser
 from .models import Note
 from . import db
+from os import path
 import json
+
 
 views = Blueprint('views', __name__)
 
@@ -33,5 +37,25 @@ def delete_note():
         if note.user_id == current_user.id:
             db.session.delete(note)
             db.session.commit()
-
     return jsonify({})
+
+@views.route('/imgur', methods=["GET"])
+def imgur():
+    config = configparser.ConfigParser()
+    configFilePath = path.abspath('website/static/auth.ini')
+    config.read(configFilePath)
+
+    client_id = config.get('credentials', 'client_id')
+    client_secret = config.get('credentials', 'client_secret')
+
+    client = ImgurClient(client_id, client_secret)
+
+    items = client.gallery()
+
+    for item in items:
+        print(item.link)
+        print(item.title)
+        print(item.views)
+    
+
+    return render_template("imgur.html", user=current_user, data=items)

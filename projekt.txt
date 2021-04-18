@@ -1,0 +1,17 @@
+- mechanizm logowania:
+	-sign_in ( zrobione )
+	-log_in ( zrobione )
+	-logout ( zrobione )
+	-zmiana danych
+	-zabezpieczenia formularzy ( zrobione )
+
+- mini serwis imgur:
+	- uploadowanie zdjęć
+	- przeglądanie swoich wrzuconych zdjęć
+	- przeglądanie zdjęć z wyszukiwarki ?? + dodawanie do ulubionych
+
+- notatki dla zalogowanego uzytkownika ( zrobione )
+
+-
+
+-
