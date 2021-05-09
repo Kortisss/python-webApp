@@ -2,75 +2,61 @@
 {% block title %}imgur page{% endblock %}
 {% block style %}
     <style>
-        body {
-            background-color:#1d1d1d !important;
-            font-family: "Asap", sans-serif;
-            color:#989898;
-            margin:10px;
-            font-size:16px;
-        }
-        #demo {
-            height:100%;
-            position:relative;
-            overflow:hidden;
-        }
-        .green{
-            background-color:#6fb936;
-        }
-        .thumb{
-            margin-bottom: 30px;
-        }
-        
-        .page-top{
-            margin-top:85px;
-        }
-        img.zoom {
-            width: 100%;
-            height: 200px;
-            border-radius:5px;
-            object-fit:cover;
-            transition: all .3s ease-in-out;
-        }
-        .transition {
-            -webkit-transform: scale(1.2); 
-            -moz-transform: scale(1.2);
-            -o-transform: scale(1.2);
-            transform: scale(1.2);
-        }
-            .modal-header {
-            border-bottom: none;
-        }
-        .modal-title {
-            color:#000;
-        }
-        .modal-footer{
-            display:none;  
-        }
+
     </style>
 {% endblock %}
 {% block content%}
-
-        <!-- Page Content -->
-<div class="container page-top">
-    <div class="row"></div>
-        {% for item in data %}
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="{{item.link}}" class="fancybox" rel="ligthbox">
-                    <img src="{{item.link}}" class="zoom img-fluid "  alt="">
-                    <p>{{item.title}}</p>
-                </a>
-            </div>
-        {% endfor %}
-    </div>
-    <!--
-        <div class="row">
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a href="https://images.pexels.com/photos/62307/air-bubbles-diving-underwater-blow-62307.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" class="fancybox" rel="ligthbox">
-                    <img src="https://images.pexels.com/photos/62307/air-bubbles-diving-underwater-blow-62307.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" class="zoom img-fluid "  alt="">
-                </a>
+<!-- Page Content -->
+<div class="accordion" id="accordionPanelsStayOpenExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+            dodaj zdjęcie
+        </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+            <div class="accordion-body">
+                <!--form dodawania zdjęcia-->
+                <form class="row row-cols-lg-auto g-3 align-items-center" action="/imgur" method="POST" enctype="multipart/form-data">
+                    <div class="col-12">
+                        <label class="visually-hidden" for="image">Wybierz plik</label>
+                        <input type="file" oninput="" id="image" name="image"  class="form-control" placeholder="Wybierz plik">
+                        <button type="submit" class="btn btn-primary m-2">Prześlij</button>
+                    </div>
+                  </form>
+                  <!--koniec formularza-->
+                  
+                  {% for link in myNewList %}
+                    <h4>
+                        <p><a href='a.html?'></a>{{link}}</p>
+                    </h4>
+                  {% endfor %}
             </div>
         </div>
-    -->
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+            dodaj album
+        </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+            <div class="accordion-body">
+                <!--form dodawania zdjęcia-->
+            
+                <!--koniec formularza-->
+                {% for link in myNewList %}
+                <h4>
+                    <p><a href='{{link}}'></a></p>
+                </h4>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
+{% endblock %}
+{% block script %}
+<script>
 
+</script>
 {% endblock %}
