@@ -1,9 +1,17 @@
 {% extends "base.html" %}
 {% block title %}imgur page{% endblock %}
 {% block style %}
-    <style>
-
-    </style>
+<style>
+    .flex-column { 
+       max-width : 260px;
+   }
+   .container {
+            background: #f9f9f9;
+    }
+    img {
+        margin: 5px;
+    }
+</style>
 {% endblock %}
 {% block content%}
 <!-- Page Content -->
@@ -23,14 +31,8 @@
                         <input type="file" oninput="" id="image" name="image"  class="form-control" placeholder="Wybierz plik">
                         <button type="submit" class="btn btn-primary m-2">Prześlij</button>
                     </div>
-                  </form>
+                </form>
                   <!--koniec formularza-->
-                  
-                  {% for link in myNewList %}
-                    <h4>
-                        <p><a href='a.html?'></a>{{link}}</p>
-                    </h4>
-                  {% endfor %}
             </div>
         </div>
     </div>
@@ -43,17 +45,32 @@
         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
             <div class="accordion-body">
                 <!--form dodawania zdjęcia-->
-            
+                <form class="row row-cols-lg-auto g-3 align-items-center" action="/imgur" method="POST">
+                    <div class="col-12">
+                        <label class="visually-hidden" for="title">Album title</label>
+                        <input type="text"id="title" name="title" class="form-control" placeholder="Album title">
+                        <label class="visually-hidden" for="description">description</label>
+                        <input type="text" id="description" name="description" class="form-control" placeholder="Album description">
+                        <button type="submit" class="btn btn-primary m-2">Create</button>
+                    </div>
+                </form>
                 <!--koniec formularza-->
-                {% for link in myNewList %}
-                <h4>
-                    <p><a href='{{link}}'></a></p>
-                </h4>
-                {% endfor %}
             </div>
         </div>
     </div>
 </div>
+
+<div class="container">
+    <div class="d-flex flex-row flex-wrap justify-content-center">
+        {% for base64 in listOfBase64Images %}
+        <div class="d-flex flex-column">
+            <img src="data:image/png;base64,{{base64}}" alt="" class="img-fluid">  
+        </div>
+        {% endfor %}
+    </div>
+</div>
+    
+
 {% endblock %}
 {% block script %}
 <script>
