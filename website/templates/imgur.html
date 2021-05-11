@@ -13,9 +13,13 @@
     }
 </style>
 {% endblock %}
+{% block Nav %}
+    <a class="nav-item nav-link" id="imgur" href="/gallery">gallery</a>
+{% endblock %}
 {% block content%}
 <!-- Page Content -->
 <div class="accordion" id="accordionPanelsStayOpenExample">
+    <!--upload Image form-->
     <div class="accordion-item">
         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
@@ -36,6 +40,7 @@
             </div>
         </div>
     </div>
+    <!--add Album form-->
     <div class="accordion-item">
         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
@@ -59,7 +64,7 @@
         </div>
     </div>
 </div>
-
+<!--Images-->
 <div class="container">
     <div class="d-flex flex-row flex-wrap justify-content-center">
         {% for base64 in listOfBase64Images %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Gallery{% endblock %}
+
+{% block content%}
+<!-- Page Content -->
+<div class="container">
+    <div class="d-flex flex-row flex-wrap justify-content-center">
+        {% for base64 in listOfBase64Images %}
+        <div class="d-flex flex-column">
+            <img src="data:image/png;base64,{{base64}}" alt="" class="img-fluid">  
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

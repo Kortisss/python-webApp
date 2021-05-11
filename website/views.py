@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, render_template, request, flash, jsonify
+from flask import Blueprint, redirect, render_template, request, flash, jsonify, url_for
 from flask_login import login_required, current_user
 from .models import Note
 from . import db
@@ -43,6 +43,7 @@ def delete_note():
     return jsonify({})
 
 @views.route('/imgur', methods=['GET', 'POST'])
+@login_required
 def imgur():
     """def createAlbum():
         if request.method == "POST":
@@ -62,14 +63,17 @@ def imgur():
             if(response.status_code == 200):
                 flash(f"Stworzono album: {u['data']['id']}", category='success')
                 print(response.text)"""
-    def uploadImage():
-        if request.method == "POST":
-            if request.files:
-                #getting filename form POST request
-                image = request.files["image"]
-                filename = image.filename
-                print(filename)
-
+    if request.method == "POST":
+        if request.files:
+            #getting filename form POST request
+            image = request.files["image"]
+            filename = image.filename
+            print(filename)
+            
+            if(filename == ""):
+                flash("Wybierz plik z C:/Users !!", category="error")
+                return redirect(url_for('views.imgur'))
+            else:
                 #searching for specific file in system
                 for root, dirs, files in os.walk(r'C:\Users'): 
                     for name in files:
@@ -99,12 +103,11 @@ def imgur():
                 if(response.status_code == 200):
                     flash(f"przesłano plik: {filename}; {linkToFileImgur}", category='success')
                     Linkslist.append(linkToFileImgur)
-                    listOfResposnes.append(response.json())  
-
-    def getUploadedImages():
-        pass
-    
-    uploadImage()          
+                    listOfResposnes.append(response.json())           
     print(Linkslist)
-    return render_template("imgur.html", user=current_user, listOfBase64Images = listOfBase64Images, Linkslist = Linkslist)
+    return render_template("imgur.html", user=current_user)
 
+@views.route('/gallery', methods=['GET'])
+@login_required
+def gallery():
+    return render_template("gallery.html", user=current_user, listOfBase64Images = listOfBase64Images)
